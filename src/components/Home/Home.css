@@ -1,0 +1,34 @@
+.main-grid {
+  width: 60%;
+  height: 700px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 4fr 1fr;
+  border: 3px solid black;
+  border-radius: 16px;
+  margin: 32px auto 0 auto;
+}
+
+.header {
+  grid-area: 1 / 1 / span 1 / -1;
+  font-family: 'Open-Sans', sans-serif;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.main-text {
+  font-style: italic;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+#movies {
+  grid-area: 2 / 1 / span 1 / span 1;
+}
+
+#added-movies {
+  grid-area: 2 / 2 / span 1 / span 1;
+}
