@@ -7,7 +7,6 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import _ from 'lodash';
 
 export default function Home() {
-
   const [movieLists, setMovieLists] = useState(
    [
      {
@@ -56,24 +55,22 @@ export default function Home() {
   }
 
   const handleDragEnd = (result) => {
-    console.log(result);
-    // if (result.destination) {
-    //   let newMovies = _.cloneDeep(availableMovies);
-    //   let [draggedMovie] = newMovies.splice(result.source.index, 1);
+    let newMovieLists = _.cloneDeep(movieLists);
+    let source = result.source ? result.source: {};
+    let destination = result.destination ? result.destination: {};
+    let sourceList = _.find(newMovieLists, list => list.listId === source.droppableId);
+    let destinationList = _.find(newMovieLists, list => list.listId === destination.droppableId);
 
-    //   if (result.source)
+    if (destination.droppableId === 'votedMovies' && destinationList && destinationList.list.length >= 5) {
+      alert("Cannot Add more than 5 movies to the voting panel");
+      return ;
 
-    //   if (result.destination.droppableId === "searchResults") {
-    //     newMovies.splice(result.destination.index, 0, draggedMovie);
-    //     setAvailableMovies(newMovies);
-    //   } else {
-    //     let newVotedMovies = _.cloneDeep(votedMovies);
+    } else if (destination && sourceList && destinationList) {
+      let [draggedMovie] = sourceList.list.splice(source.index, 1);
+      destinationList.list.splice(destination.index, 0, draggedMovie);
+    }
 
-    //     newVotedMovies.splice(result.destination.index, 0, draggedMovie);
-    //     setAvailableMovies(newMovies);
-    //     setVotedMovies(newVotedMovies);
-    //   }
-    // }
+    setMovieLists(newMovieLists);
   };
 
   return (
@@ -86,6 +83,8 @@ export default function Home() {
       <div id="search">
         <Searchbar searchMovies={fetchData}/>
       </div>
+
+      <p id="info" className="main-text">Rate your <strong>top 5</strong> favorite movies below. Drag movies to the voted panel and order them from your favorite to your least favorite. Once finished, press the "Submit" button to send your votes</p>
 
       <DragDropContext onDragEnd={handleDragEnd}>
 
@@ -108,6 +107,10 @@ export default function Home() {
         </div>
 
       </DragDropContext>
+
+      <button id="submit" class="button">
+        Sumbit
+      </button>
     </div>
   );
 }
