@@ -1,5 +1,4 @@
 .movie-card {
-    margin: 12px 8px;
     max-width: 300px;
     display: flex;
     flex-direction: column;
@@ -8,10 +7,22 @@
     border: 1px solid black;
     border-radius: 16px;
     cursor: pointer;
-    transition: border-width 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    padding: 4px;
+    margin: 0 0 8px 0;
+}
+
+.movie-card-drag {
+    color: white;
+    background-color: black;
 }
 
 .movie-card:hover {
+    color: white;
+    background-color: black;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-    border-width: 2px;
+}
+
+.movie-card:active {
+    box-shadow: none;
 }

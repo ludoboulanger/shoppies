@@ -9,6 +9,7 @@ export async function fetchMovies(movieTitle) {
         let movieResults = await response.json();
         console.log(movieResults);
         return _.map(movieResults.Search, (movie) => ({
+            id: movie.imdbID,
             title: movie.Title,
             year: movie.Year,
         }))
