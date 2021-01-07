@@ -37,3 +37,11 @@
 #added-movies {
   grid-area: 3 / 2 / span 1 / span 1;
 }
+
+.movie-container {
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 0 12px;
+  height: 500px;
+  overflow: auto;
+}
