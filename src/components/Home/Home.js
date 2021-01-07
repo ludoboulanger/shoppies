@@ -5,6 +5,7 @@ import { fetchMovies } from '../../utils/MovieFetcher';
 import Searchbar from '../Search/Search';
 import { DragDropContext } from 'react-beautiful-dnd';
 import _ from 'lodash';
+import SubmitDialog from '../SubmitDialog/SubmitDialog';
 
 export default function Home() {
   const [movieLists, setMovieLists] = useState(
@@ -18,7 +19,8 @@ export default function Home() {
        list: [],
      },
    ]
-  )
+  );
+  const [openSubmit, setOpenSubmit] = useState(false);
 
   const fetchData = async (title) => {
     let newMovieLists = _.cloneDeep(movieLists)
@@ -73,7 +75,12 @@ export default function Home() {
     setMovieLists(newMovieLists);
   };
 
+  const handleSubmitClicked = () => {
+    setOpenSubmit(true);
+  }
+
   return (
+    <>
     <div className="main-grid">
       <div className="header">
         <h1 className="title">Shoppies</h1>
@@ -108,9 +115,15 @@ export default function Home() {
 
       </DragDropContext>
 
-      <button id="submit" class="button">
+      <button onClick={handleSubmitClicked}id="submit" className="button">
         Sumbit
       </button>
     </div>
+
+    {
+      openSubmit &&
+      <SubmitDialog />
+    }
+    </>
   );
 }
