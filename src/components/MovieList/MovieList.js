@@ -4,10 +4,14 @@ import Card from '../Card/Card';
 import _ from 'lodash'
 
 export default function MovieList({type, moviesToDisplay}) {
-  const [movies] = useState([1,2,3,4,5]);
+  const [movies, setMovies] = useState(moviesToDisplay);
+
+  useEffect(() => {
+    setMovies(moviesToDisplay);
+  }, [moviesToDisplay]);
 
   return (
-    <div>
+    <div className="container">
       <h3 className="heading-h3">
         {type}
       </h3>
@@ -16,7 +20,7 @@ export default function MovieList({type, moviesToDisplay}) {
           _.map(movies, (movie, index) => {
             return (
               <React.Fragment key={index}>
-                <Card title={"Bob"}></Card>
+                <Card title={movie.title} date={movie.year}></Card>
               </React.Fragment>
 
             )

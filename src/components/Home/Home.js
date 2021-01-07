@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import MovieList from '../MovieList/MovieList';
+import { fetchMovies } from '../../utils/MovieFetcher';
 
 export default function Home() {
+  const [availableMovies, setAvailableMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let movies = await fetchMovies("ram");
+      console.log(movies);
+      setAvailableMovies(movies);
+    }
+
+    fetchData();
+  }, []);
+  
   return(
     <div className="main-grid">
       <div className="header">
@@ -11,11 +24,11 @@ export default function Home() {
       </div>
 
       <div id="movies">
-        <MovieList type="Available Movies"/>
+        <MovieList moviesToDisplay={availableMovies} type="Available Movies"/>
       </div>
 
       <div id="added-movies">
-        <MovieList type="Voted Movies"/>
+        <MovieList moviesToDisplay={[]} type="Voted Movies"/>
       </div>
 
     </div>
