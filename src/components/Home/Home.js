@@ -25,11 +25,11 @@ export default function Home() {
       </div>
 
       <div id="movies">
-        <MovieList moviesToDisplay={availableMovies} type="Available Movies"/>
+        <MovieList moviesToDisplay={availableMovies} voted={false}/>
       </div>
 
       <div id="added-movies">
-        <MovieList moviesToDisplay={[]} type="Voted Movies"/>
+        <MovieList moviesToDisplay={[]} voted={true}/>
       </div>
 
     </div>
