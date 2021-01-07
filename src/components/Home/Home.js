@@ -11,11 +11,11 @@ export default function Home() {
       </div>
 
       <div id="movies">
-        <MovieList/>
+        <MovieList type="Available Movies"/>
       </div>
 
       <div id="added-movies">
-        <MovieList/>
+        <MovieList type="Voted Movies"/>
       </div>
 
     </div>
